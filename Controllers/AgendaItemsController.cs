@@ -19,7 +19,7 @@ namespace AgendaApi.Controllers
         {
             _context = context;
         }
-        [EnableCors("Policy1")]
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AgendaItemDTO>>> GetagendaItems()
         {

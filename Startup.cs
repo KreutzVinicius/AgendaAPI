@@ -20,14 +20,10 @@ namespace AgendaApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           services.AddCors(options =>
-            {
-                options.AddPolicy("Policy1",
-                    builder =>
-                    {
-                        builder.WithOrigins("https://localhost:44396/api/AgendaItems/");
-                    });
-            });
+                services.AddCors(c =>
+                {
+                    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+                });
 
             services.AddDbContext<AgendaContext>(opt =>
             opt.UseInMemoryDatabase("AgendaList"));
@@ -49,8 +45,8 @@ namespace AgendaApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            
-            app.UseCors();
+
+            app.UseCors(options => options.AllowAnyOrigin());
 
             app.UseAuthorization();
 
